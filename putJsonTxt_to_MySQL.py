@@ -6,7 +6,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-db = MySQLdb.connect("10.10.77.43","umsManager","password","test" )
+db = MySQLdb.connect("localhost","root","root","test" )
 
 
 cursor = db.cursor()
@@ -63,7 +63,7 @@ for line in f:
         invest_org = ""
     print member
 
-    db = MySQLdb.connect("10.10.77.43","umsManager","password","test" )
+    db = MySQLdb.connect("localhost","root","root","test" )
 
     cursor = db.cursor()
     db.set_character_set('utf8')
