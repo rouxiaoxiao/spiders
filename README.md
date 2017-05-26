@@ -3,7 +3,9 @@
 ITjuzi_spider.py                用于爬取IT橘子上60000+公司的信息，改动文件保存地址即可直接运行<br>
 putJsonTxt_to_MySQL.py          可把从网站（IT橘子等）爬取的json数据，保存在自己的MySQL数据库中<br>
 
-技术说明：python版本：python2.7   数据库类型：MySQL
+技术说明
+=========
+python版本：python2.7   数据库类型：MySQL
 
 
 更新日志
