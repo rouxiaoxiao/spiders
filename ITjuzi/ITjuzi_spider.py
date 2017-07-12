@@ -151,13 +151,13 @@ def get_content(url, headers):
 
 if __name__ == '__main__':
 
-    company_file = open("C:\Users\zhengzhongwang\Desktop\company_file.txt", "a")
+    company_file = open("C:/Users/xiaoxiao/Desktop/company_file.txt", "a")
 
     for num in range(43481, 50000, 1):
         print "id:", num
 
         urll = "http://www.itjuzi.com/company/{}".format(num)
-        company_file = open("C:\Users\zhengzhongwang\Desktop\company_file.txt", "a")
+        company_file = open("C:/Users/xiaoxiao/Desktopcompany_file.txt", "a")
 
         # get_content(urll, headers)
         # print get_content(urll, headers)
