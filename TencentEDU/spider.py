@@ -19,6 +19,14 @@ sys.setdefaultencoding('utf-8')
 def get_content(url,num,course_file):
 
 
+    wb_data = requests.get(url)
+    soup = BeautifulSoup(wb_data.text, 'lxml')
+
+    if soup.find_all('div', class_='msg-text'):
+        time.sleep(1)
+        print 'not Found'
+        return None
+
     driver = webdriver.PhantomJS()
     driver.get(url)
     time.sleep(2)
@@ -86,7 +94,7 @@ def get_content(url,num,course_file):
 
 
 def write_file(num):
-    course_file = open("C:/Users/zhengzhongwang/Desktop/course_file.txt", "a")
+    course_file = open("C:/Users/xiaoxiao/Desktop/course_file.txt", "a")
 
 
 
@@ -94,8 +102,8 @@ def write_file(num):
     url = 'https://ke.qq.com/course/{}'.format(num)
     if get_content(url,num,course_file) != None:
         try:
-            course_file = open("C:/Users/zhengzhongwang/Desktop/course_file.txt", "a")
-            course_file.write(get_content(url,num,course_file) + "\n")
+            course_file = open("C:/Users/xiaoxiao/Desktop/course_file.txt", "a")
+            course_file.write(get_content(url, num, course_file) + "\n")
             course_file.close()
             print get_content(url,num,course_file)
         except TypeError, a:
@@ -114,6 +122,6 @@ def write_file(num):
 if __name__ == '__main__':
     pool = Pool()
     # pool = Pool(processes=6)
-    pool.map(write_file,range(250000, 300000, 1))
+    pool.map(write_file,range(150000, 200000, 1))
 
 
