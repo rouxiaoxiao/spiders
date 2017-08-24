@@ -99,6 +99,7 @@ def write_file(num):
 
 
     print "id:", num
+    print time.localtime(time.time())
     url = 'https://ke.qq.com/course/{}'.format(num)
     if get_content(url,num,course_file) != None:
         try:
