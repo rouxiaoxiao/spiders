@@ -43,25 +43,40 @@ def get_content(id, headers):
         time.sleep(5)
         soup = BeautifulSoup(content, "lxml")
         gif = soup.select("#pinyinImg")[0]['src']
-        download_gif(id,gif)
+        title = soup.select("head > title")[0].get_text()
+        word = str(id)
+        for ch in title:
+            if is_chinese(ch):
+                word = ch
+                break
+        print(word)
+        download_gif(id, word, gif)
         print(gif)
 
     except urllib2.URLError, e:
         print e.reason
 
 
+# 判断是否为汉字
+def is_chinese(uchar):
+    if uchar >= u'\u4e00' and uchar <= u'\u9fa5':
+        return True
+    else:
+        return False
+
+
 # 保存图片
-def download_gif(id, gifUrl):
+def download_gif(id, word, gifUrl):
     web = urllib.urlopen(gifUrl)
     data = web.read()
-    f = open('C:\Users\liangxiaolx\Desktop\ChineseWord\dataOut/' + str(id) + '.gif', "wb")
+    f = open('C:\Users\liangxiaolx\Desktop\ChineseWord\dataOut/' + word + "-" + str(id) + '.gif', "wb")
     f.write(data)
     f.close()
 
 
 if __name__ == '__main__':
     print "hello"
-    for num in range(1378, 3500, 1):
+    for num in range(1, 3500, 1):
         print "id:", num
         print(num)
         get_content(num, headers)

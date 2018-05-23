@@ -62,9 +62,9 @@ def get_content(id, headers):
 
 if __name__ == '__main__':
     print "hello"
-    for num in range(2634, 4197, 1):
+    for num in range(10, 4198, 1):
         print "id:", num
-        print(num)
-        howlong = [1, 0.8, 0.3, 0.4]
+        print(str(num) + time.asctime(time.localtime(time.time())))
+        howlong = [0.1, 0.2, 0.3, 0.4]
         time.sleep(random.choice(howlong))
         get_content(num, headers)

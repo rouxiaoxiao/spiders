@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc99997a-174f-45d0-b8ac-27dd770dc3a8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/JapDict/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JapDict/kotobankContent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JapDict/kotobankIndex.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JapDict/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JapDict/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/HanDian.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/WrittenChinese.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/biHuaChaXun.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/chaBiHua.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/chineseWord.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/StrokesGif/wikiDict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/spiders.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/spiders.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ITjuzi/ITjuzi_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/ITjuzi/ITjuzi_spider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JapDict/kotobankIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/JapDict/kotobankIndex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StrokesGif/chaBiHua.py" beforeDir="false" afterPath="$PROJECT_DIR$/StrokesGif/chaBiHua.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,12 +19,12 @@
     <SUITE FILE_PATH="coverage/spiders$pages_parsing.coverage" NAME="pages_parsing Coverage Results" MODIFIED="1499753271262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linkedln" />
     <SUITE FILE_PATH="coverage/spiders$spiderExcel.coverage" NAME="spiderExcel Coverage Results" MODIFIED="1499753967692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Linkedln" />
     <SUITE FILE_PATH="coverage/spiders$spider.coverage" NAME="spider Coverage Results" MODIFIED="1503495045044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TencentEDU" />
-    <SUITE FILE_PATH="coverage/spiders$chaBiHua.coverage" NAME="chaBiHua Coverage Results" MODIFIED="1524466687308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/StrokesGif" />
+    <SUITE FILE_PATH="coverage/spiders$chaBiHua.coverage" NAME="chaBiHua Coverage Results" MODIFIED="1526977023862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/StrokesGif" />
     <SUITE FILE_PATH="coverage/spiders$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1524214153213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/StrokesGif" />
     <SUITE FILE_PATH="coverage/spiders$ITjuzi_spider.coverage" NAME="ITjuzi_spider Coverage Results" MODIFIED="1524209635527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ITjuzi" />
     <SUITE FILE_PATH="coverage/spiders$wikiDict.coverage" NAME="wikiDict Coverage Results" MODIFIED="1524452871834" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/StrokesGif" />
     <SUITE FILE_PATH="coverage/spiders$kotobank.coverage" NAME="kotobank Coverage Results" MODIFIED="1525260139000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/JapDict" />
-    <SUITE FILE_PATH="coverage/spiders$kotobankIndex.coverage" NAME="kotobankIndex Coverage Results" MODIFIED="1525326843028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/JapDict" />
+    <SUITE FILE_PATH="coverage/spiders$kotobankIndex.coverage" NAME="kotobankIndex Coverage Results" MODIFIED="1526974680024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/JapDict" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -46,7 +34,7 @@
       <file leaf-file-name="ITjuzi_spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ITjuzi/ITjuzi_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
+            <state relative-caret-position="3498">
               <caret line="114" column="49" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="49" />
               <folding>
                 <element signature="e#21#35#0" expanded="true" />
@@ -70,32 +58,17 @@
       <file leaf-file-name="kotobankIndex.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JapDict/kotobankIndex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1881">
-              <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
-              <folding>
-                <element signature="e#37#50#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="627">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spiderExcel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Linkedln/spiderExcel.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5049">
-              <caret line="161" column="46" lean-forward="true" selection-start-line="160" selection-start-column="12" selection-end-line="161" selection-end-column="46" />
-              <folding>
-                <element signature="e#21#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="chaBiHua.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chaBiHua.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/StrokesGif/chaBiHua.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1881">
-              <caret line="66" column="33" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="66" selection-end-column="33" />
+            <state relative-caret-position="93">
+              <caret line="69" column="32" lean-forward="true" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
               <folding>
                 <element signature="e#37#50#0" expanded="true" />
               </folding>
@@ -103,14 +76,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kotobankContent.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="kotobankContent.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JapDict/kotobankContent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="98" column="18" lean-forward="true" selection-start-line="98" selection-start-column="18" selection-end-line="98" selection-end-column="18" />
+            <state relative-caret-position="2937">
+              <caret line="96" column="40" selection-start-line="95" selection-start-column="85" selection-end-line="96" selection-end-column="40" />
               <folding>
                 <element signature="e#37#48#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="429">
+              <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -119,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/JapDict/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -127,7 +109,7 @@
       <file leaf-file-name="spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TencentEDU/spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
+            <state relative-caret-position="4224">
               <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
             </state>
           </provider>
@@ -137,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/TencentEDU/spider2.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2310">
-              <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="23" />
+              <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="23" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -206,13 +188,14 @@
         <option value="$PROJECT_DIR$/StrokesGif/wikiDict.py" />
         <option value="$PROJECT_DIR$/StrokesGif/biHuaChaXun.py" />
         <option value="$PROJECT_DIR$/StrokesGif/HanDian.py" />
-        <option value="$PROJECT_DIR$/StrokesGif/chaBiHua.py" />
         <option value="$PROJECT_DIR$/StrokesGif/WrittenChinese.py" />
         <option value="$PROJECT_DIR$/JapDict/test.html" />
         <option value="$PROJECT_DIR$/JapDict/kotobank.py" />
         <option value="$PROJECT_DIR$/JapDict/test.py" />
-        <option value="$PROJECT_DIR$/JapDict/kotobankIndex.py" />
         <option value="$PROJECT_DIR$/JapDict/kotobankContent.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/JapDict/kotobankIndex.py" />
+        <option value="$PROJECT_DIR$/StrokesGif/chaBiHua.py" />
       </list>
     </option>
   </component>
@@ -239,6 +222,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,7 +259,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -286,13 +269,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xiaoxiao\pro\spiders\ITjuzi" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects" />
       <recent name="D:\PycharmProjects\StrokesGif" />
       <recent name="C:\Users\xiaoxiao\pro\spiders\Linkedln" />
       <recent name="C:\Users\xiaoxiao\pro\spiders" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\xiaoxiao\pro\spiders\ITjuzi" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -307,7 +291,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.kotobankContent">
+  <component name="RunManager" selected="Python.chaBiHua">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <module name="untitled3" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -586,11 +570,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.kotobankContent" />
+        <item itemvalue="Python.chaBiHua" />
         <item itemvalue="Python.kotobankIndex" />
+        <item itemvalue="Python.kotobankContent" />
         <item itemvalue="Python.kotobank" />
         <item itemvalue="Python tests.Unittests for WrittenChinese.seleniumTest" />
-        <item itemvalue="Python.chaBiHua" />
       </list>
     </recent_temporary>
   </component>
@@ -635,12 +619,11 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32933104" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.3326572" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946004" weight="0.45943204" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49892008" visible="true" weight="0.45638946" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13120951" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946004" visible="true" weight="0.46247464" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49892008" weight="0.36206895" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20572354" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -652,6 +635,7 @@
       <window_info anchor="right" id="Mongo Explorer" order="3" weight="0.32980332" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -691,16 +675,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TencentEDU/spider2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2310">
-          <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="23" />
-          <folding>
-            <element signature="e#22#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/bs4/element.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="59598">
@@ -1002,19 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5049">
           <caret line="161" column="46" lean-forward="true" selection-start-line="160" selection-start-column="12" selection-end-line="161" selection-end-column="46" />
-          <folding>
-            <element signature="e#21#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/StrokesGif/chaBiHua.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1881">
-          <caret line="66" column="33" lean-forward="true" selection-start-line="63" selection-start-column="4" selection-end-line="66" selection-end-column="33" />
-          <folding>
-            <element signature="e#37#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1038,7 +999,7 @@
     <entry file="file://$PROJECT_DIR$/TencentEDU/spider2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2310">
-          <caret line="84" column="8" lean-forward="true" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="23" />
+          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="23" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
@@ -1054,7 +1015,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ITjuzi/ITjuzi_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
+        <state relative-caret-position="3498">
           <caret line="114" column="49" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="49" />
           <folding>
             <element signature="e#21#35#0" expanded="true" />
@@ -1064,7 +1025,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TencentEDU/spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
+        <state relative-caret-position="4224">
           <caret line="148" column="33" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="33" />
         </state>
       </provider>
@@ -1072,26 +1033,40 @@
     <entry file="file://$PROJECT_DIR$/JapDict/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JapDict/kotobankIndex.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1881">
-          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
-          <folding>
-            <element signature="e#37#50#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="429">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/JapDict/kotobankContent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="98" column="18" lean-forward="true" selection-start-line="98" selection-start-column="18" selection-end-line="98" selection-end-column="18" />
+        <state relative-caret-position="2937">
+          <caret line="96" column="40" selection-start-line="95" selection-start-column="85" selection-end-line="96" selection-end-column="40" />
           <folding>
             <element signature="e#37#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JapDict/kotobankIndex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StrokesGif/chaBiHua.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="69" column="32" lean-forward="true" selection-start-line="69" selection-start-column="32" selection-end-line="69" selection-end-column="32" />
+          <folding>
+            <element signature="e#37#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
