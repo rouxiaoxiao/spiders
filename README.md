@@ -1,8 +1,8 @@
 文件说明
 =========
 ITjuzi                          IT桔子公司的相关信息<br>
-    ITjuzi_spider.py                用于爬取IT橘子上60000+公司的信息，改动文件保存地址即可直接运行<br>
-    putJsonTxt_to_MySQL.py          可把从网站（IT橘子等）爬取的json数据，保存在自己的MySQL数据库中<br>
+         ITjuzi_spider.py                用于爬取IT橘子上60000+公司的信息，改动文件保存地址即可直接运行<br>
+         putJsonTxt_to_MySQL.py          可把从网站（IT橘子等）爬取的json数据，保存在自己的MySQL数据库中<br>
 58tongcheng                     58同城爬取<br>
 JapDict                         日语词典的爬取<br>
 Linkedln                        领英招聘信息的爬取<br>
