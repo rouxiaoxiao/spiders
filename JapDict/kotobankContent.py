@@ -23,7 +23,7 @@ headers = [
 
 
 # https://zh.wiktionary.org/wiki/%E5%A5%BD
-def get_content(url):
+def get_content(url, wordHead):
     random_header = random.choice(headers)
     cj = cookielib.CookieJar()
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
@@ -43,11 +43,21 @@ def get_content(url):
         JapWords = {}
         # 获取词头
         if (soup.select('h1')[0].find('span')):
-            pianJiaMing = soup.select('h1')[0].find('span').get_text().strip().replace("\n", "")
-            wordHead = soup.select('h1')[0].get_text().replace(pianJiaMing, '').strip().replace("\n", "")
+            titleList = soup.select('h1')[0].find_all('span')
+            pianJiaMing = ""
+            yingyubiaoji = ""
+            for title in titleList:
+                if (title.get_text().find("（読み）") >= 0):
+                    pianJiaMing = title.get_text().strip().replace("（読み）", '')
+                    print("片假名：" + pianJiaMing)
+                if (title.get_text().find("（英語表記）") >= 0):
+                    yingyubiaoji = title.get_text().strip().replace("（英語表記）", '')
+                    print("英语标记：" + yingyubiaoji)
+            # wordHead = soup.select('h1')[0].get_text().replace("（英語表記）", '').replace("（読み）", '').replace(pianJiaMing, '').replace(yingyubiaoji, '').strip().replace("\n", "")
             JapWords['pianJiaMing'] = pianJiaMing
-        else:
-            wordHead = soup.select('h1')[0].get_text().strip().replace("\n", "")
+            JapWords['yingyubiaoji'] = yingyubiaoji
+        # else:
+        # wordHead = soup.select('h1')[0].get_text().strip().replace("\n", "")
         JapWords['wordHead'] = wordHead
         # 获取读音
         # 获取日语简明释义
@@ -80,7 +90,8 @@ def get_content(url):
                     content['pingJiaMing'] = pingJiaMing
                     # 该书中的释义
                     if (soup.findAll('section')[shiyiIndex]):
-                        section = soup.findAll('section')[shiyiIndex].get_text().replace(' ', '').strip().replace("\n", "")
+                        section = soup.findAll('section')[shiyiIndex].get_text().replace(' ', '').strip().replace("\n",
+                                                                                                                  "")
                         content['description'] = section
                         shiyiIndex = shiyiIndex + 1
                     contentlist.append(content)
@@ -97,32 +108,34 @@ def get_content(url):
 
 if __name__ == '__main__':
     print "hello"
-    # JapWord_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataOut\JapWordDes.json", "a")
-    # url_data_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataIn\wordHead.txt")
-    # i = 0
-    # for line in url_data_file:
-    #     i = i + 1
-    #     print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[0] + '~~~~~' + time.asctime(
-    #         time.localtime(time.time())))
-    #     url = line.split("####")[2].replace("\n", "")
-    #     print(url)
-    #     howlong = [0.1, 0.2, 0.3, 0.4]
-    #     time.sleep(random.choice(howlong))
-    #     # get_content(url)
-    #     if get_content(url) != None:
-    #         try:
-    #             JapWord_file.write(get_content(url) + "\n")
-    #         except TypeError, a:
-    #             print a
-    # url_data_file.close()
-    # JapWord_file.close()
+    JapWord_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataOut\JapWordDes.json", "a")
+    url_data_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataIn\wordHead.txt")
+    i = 0
+    for line in url_data_file:
+        i = i + 1
+        print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[0] + '~~~~~' + time.asctime(
+            time.localtime(time.time())))
+        wordHead = line.split("####")[1].replace("\n", "")
+        url = line.split("####")[2].replace("\n", "")
+        print(url)
+        howlong = [0.1, 0.2, 0.3, 0.4]
+        time.sleep(random.choice(howlong))
+        # get_content(url)
+        if get_content(url, wordHead) != None:
+            try:
+                JapWord_file.write(get_content(url,wordHead) + "\n")
+            except Exception, a:
+                print a
+                continue
+    url_data_file.close()
+    JapWord_file.close()
 
     # 单url测试
-    JapWord_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataOut\\test.json", "a")
-    url = 'https://kotobank.jp/word/%E3%82%A2%E3%82%A4%E3%83%8C%E8%AA%9E-23826#E3.83.87.E3.82.B8.E3.82.BF.E3.83.AB.E5.A4.A7.E8.BE.9E.E6.B3.89'
-    if get_content(url) != None:
-        try:
-            JapWord_file.write(get_content(url) + "\n")
-        except TypeError, a:
-            print a
-    JapWord_file.close()
+    # JapWord_file = open("C:\Users\liangxiaolx\Desktop\JapWordSpider\dataOut\\test.json", "a")
+    # url = 'https://kotobank.jp/word/%E5%90%88-61351#E3.83.87.E3.82.B8.E3.82.BF.E3.83.AB.E5.A4.A7.E8.BE.9E.E6.B3.89'
+    # if get_content(url) != None:
+    #     try:
+    #         JapWord_file.write(get_content(url) + "\n")
+    #     except TypeError, a:
+    #         print a
+    # JapWord_file.close()
