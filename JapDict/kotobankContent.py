@@ -48,7 +48,6 @@ def get_content(url, wordHead):
             yingyubiaoji = ""
             for title in titleList:
                 if (title.get_text().find("（読み）") >= 0):
-                    pianJiaMing = title.get_text().strip().replace("（読み）", '')
                     print("片假名：" + pianJiaMing)
                 if (title.get_text().find("（英語表記）") >= 0):
                     yingyubiaoji = title.get_text().strip().replace("（英語表記）", '')
@@ -123,7 +122,7 @@ if __name__ == '__main__':
         # get_content(url)
         if get_content(url, wordHead) != None:
             try:
-                JapWord_file.write(get_content(url,wordHead) + "\n")
+                JapWord_file.write(get_content(url, wordHead) + "\n")
             except Exception, a:
                 print a
                 continue
@@ -139,3 +138,5 @@ if __name__ == '__main__':
     #     except TypeError, a:
     #         print a
     # JapWord_file.close()
+
+#     https://kotobank.jp/word/%E3%83%9E%E3%82%B1%E3%83%89%E3%83%8B%E3%82%A2%E5%85%B1%E5%92%8C%E5%9B%BD-1419018#E6.97.A5.E6.9C.AC.E5.A4.A7.E7.99.BE.E7.A7.91.E5.85.A8.E6.9B.B8.28.E3.83.8B.E3.83.83.E3.83.9D.E3.83.8B.E3.82.AB.29
