@@ -9,6 +9,7 @@ Linkedln                        领英招聘信息的爬取<br>
 StrokesGif                      汉字笔画的爬取<br>
 TencentEDU                      腾讯课堂的爬取<br>
 jiazhangbang                    家长帮的爬取<br>
+ChinsesWord                               汉字信息网站爬取<br>
 
 技术说明
 =========
