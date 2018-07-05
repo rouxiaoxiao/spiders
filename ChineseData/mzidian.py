@@ -188,6 +188,9 @@ def get_content(url_suffix, wordHead, headers):
             for detailed_explanation_mb in detailed_explanation_mb_list:
                 detailed_explanation_mb_children_list = list(detailed_explanation_mb.children)
                 for child in detailed_explanation_mb_children_list:
+                    if child.get_text() == "":
+                        continue
+                    print("child:" + str(child))
                     if child.name == "h3":
                         mbPart = {}
                         mbList.append(mbPart)
@@ -201,11 +204,22 @@ def get_content(url_suffix, wordHead, headers):
                             if child.find("strong"):
                                 dataObj = {}
                                 dataList.append(dataObj)
-                                dataObj['name'] = child.get_text()
+                                dataObj['word'] = child.get_text()
                                 sense_list = []
                                 dataObj['sense'] = sense_list
-                            elif dataObj.has_key('name') and ('cx' not in dataObj):
-                                dataObj['cx'] = child.get_text()
+                            # 有可能第一个模块中没有假信息，所以没有得到false_class_id
+                            if not vars().has_key('dataObj'):
+                                continue
+                            elif dataObj.has_key('word') and ('cx' not in dataObj):
+                                # vars().has_key('dataObj') and \
+                                print(child)
+                                if child.find("span", class_="pinyin"):
+                                    dataObj['word'] = dataObj.get('word') + "(" + child.get_text().replace(" ", ")")
+                                if child.get_text() == "":
+                                    dataObj['cx'] = ""
+                                else:
+                                    if child.get_text()[0] == "〈":
+                                        dataObj['cx'] = child.get_text()
                             else:
                                 if child.get_text()[0] == '(':
                                     sense_obj = {}
@@ -214,7 +228,16 @@ def get_content(url_suffix, wordHead, headers):
                                     lj_list = []
                                     sense_obj['lj'] = lj_list
                                 else:
-                                    lj_list.append(child.get_text())
+                                    if vars().has_key('lj_list'):
+                                        lj_list.append(child.get_text())
+                                    else:
+                                        sense_obj = {}
+                                        # if vars().has_key('sense_list'):
+                                        #     sense_list.append(sense_obj)
+                                        sense_list.append(sense_obj)
+                                        sense_obj['jmsy'] = child.get_text()
+                                        lj_list = []
+                                        sense_obj['lj'] = lj_list
                         else:
                             box2_p_a_list = child.find_all("a")
                             for box2_p_a in box2_p_a_list:
@@ -234,28 +257,28 @@ def get_content(url_suffix, wordHead, headers):
 
 if __name__ == '__main__':
     print "hello"
-    # wordHead_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataIn\\test.txt")
-    # word_des_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataOut\ChineseWordDes.json", "a")
-    # i = 0
-    # for line in wordHead_file:
-    #     i = i + 1
-    #     print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[2] + '~~~~~' + time.asctime(
-    #         time.localtime(time.time())))
-    #     wordHead = line.split("####")[0].replace("\n", "")
-    #     url_suffix = line.split("####")[1].replace("\n", "")
-    #     print("wordHead:" + wordHead)
-    #     print("url_suffix:" + url_suffix)
-    #     howlong = [0.1, 0.2, 0.3, 0.4]
-    #     time.sleep(random.choice(howlong))
-    #     if get_content(url_suffix, wordHead, headers) != None:
-    #         try:
-    #             word_des_file.write(get_content(url_suffix, wordHead, headers) + "\n")
-    #             word_des_file.flush()
-    #         except Exception, a:
-    #             print a
-    #             continue
-    # word_des_file.close()
-    # wordHead_file.close()
+    wordHead_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataIn\\wordHead_update(40001-end).txt")
+    word_des_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataOut\ChineseWordDes.json", "a")
+    i = 0
+    for line in wordHead_file:
+        i = i + 1
+        print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[2] + '~~~~~' + time.asctime(
+            time.localtime(time.time())))
+        wordHead = line.split("####")[0].replace("\n", "")
+        url_suffix = line.split("####")[1].replace("\n", "")
+        print("wordHead:" + wordHead)
+        print("url_suffix:" + url_suffix)
+        howlong = [0.1, 0.2, 0.3, 0.4]
+        time.sleep(random.choice(howlong))
+        if get_content(url_suffix, wordHead, headers) != None:
+            try:
+                word_des_file.write(get_content(url_suffix, wordHead, headers) + "\n")
+                word_des_file.flush()
+            except Exception, a:
+                print a
+                continue
+    word_des_file.close()
+    wordHead_file.close()
 
-    url_suffix = "zi5927.html"
-    get_content(url_suffix, "好", headers)
+    # url_suffix = "zi814c.html"
+    # get_content(url_suffix, "好", headers)

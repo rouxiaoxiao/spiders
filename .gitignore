@@ -5,7 +5,6 @@ venv/
 # IDEA #
 .idea/
 .idea/misc.xml
-
 *.iml
 
 # Eclipse #
