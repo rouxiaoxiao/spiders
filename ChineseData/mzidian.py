@@ -260,25 +260,25 @@ if __name__ == '__main__':
     wordHead_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataIn\\wordHead_update(40001-end).txt")
     word_des_file = open("C:\Users\liangxiaolx\Desktop\ChineseWord\mzidian\dataOut\ChineseWordDes.json", "a")
     i = 0
-    for line in wordHead_file:
-        i = i + 1
-        print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[2] + '~~~~~' + time.asctime(
-            time.localtime(time.time())))
-        wordHead = line.split("####")[0].replace("\n", "")
-        url_suffix = line.split("####")[1].replace("\n", "")
-        print("wordHead:" + wordHead)
-        print("url_suffix:" + url_suffix)
-        howlong = [0.1, 0.2, 0.3, 0.4]
-        time.sleep(random.choice(howlong))
-        if get_content(url_suffix, wordHead, headers) != None:
-            try:
-                word_des_file.write(get_content(url_suffix, wordHead, headers) + "\n")
-                word_des_file.flush()
-            except Exception, a:
-                print a
-                continue
-    word_des_file.close()
-    wordHead_file.close()
+    # for line in wordHead_file:
+    #     i = i + 1
+    #     print('~~~~~我是第' + str(i) + '个单词~~~~~位于' + line.split("####")[2] + '~~~~~' + time.asctime(
+    #         time.localtime(time.time())))
+    #     wordHead = line.split("####")[0].replace("\n", "")
+    #     url_suffix = line.split("####")[1].replace("\n", "")
+    #     print("wordHead:" + wordHead)
+    #     print("url_suffix:" + url_suffix)
+    #     howlong = [0.1, 0.2, 0.3, 0.4]
+    #     time.sleep(random.choice(howlong))
+    #     if get_content(url_suffix, wordHead, headers) != None:
+    #         try:
+    #             word_des_file.write(get_content(url_suffix, wordHead, headers) + "\n")
+    #             word_des_file.flush()
+    #         except Exception, a:
+    #             print a
+    #             continue
+    # word_des_file.close()
+    # wordHead_file.close()
 
-    # url_suffix = "zi814c.html"
-    # get_content(url_suffix, "好", headers)
+    url_suffix = "zi597d.html"
+    get_content(url_suffix, "好", headers)
