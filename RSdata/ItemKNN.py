@@ -101,9 +101,11 @@ class ItemBasedCF:
 if __name__ == "__main__":
     file = open("itemKNN.txt", "a")
 
-    ibc = ItemBasedCF(filename='ml-100k')  # 初始化数据
+    ibc = ItemBasedCF(filename='ml-1m')  # 初始化数据
     file.write("data=" + str(ibc.filename) + "\n")
+    print "开始计算物品相似度"
     ibc.ItemSimilarity()  # 计算物品相似度矩阵
+    print "结束计算物品相似度"
     tuijian_list_dict = {}
     index = 0
     for test_key in ibc.test_dict.keys():
