@@ -7,26 +7,38 @@ import numpy as np
 
 def getTrainTest(filename):
     print "getTrainTest"
-    if filename == "ml-1m":
-        file = open("ml-1m/ratings.dat")
-        print "file"
-        train = []
-        test = []
-        index = 0
-        pre_uid = -1
-        for line in file:
-            index = index + 1
-            if index % 10000 == 0:
-                print "运行到第" + str(index) + "行数据"
-            lineSub = line.split("::")
-            uid = lineSub[0]
-            iid = lineSub[1]
-            if uid != pre_uid:
-                test.append(line)
-            else:
-                train.append(line)
-            pre_uid = uid
-        return train, test
+    file = open(filename + "/ratings.dat")
+    train = []
+    test = []
+    index = 0
+    dict = {}
+    for line in file:
+        index = index + 1
+        if index % 10000 == 0:
+            print "运行到第" + str(index) + "行数据"
+        lineSub = line.split("::")
+        uid = lineSub[0]
+        iid = lineSub[1]
+        rank = lineSub[2]
+        if dict.has_key(uid):
+            dict_list = dict[uid]
+            list2 = []
+            for list_iid in dict_list:
+                list2.append(list_iid)
+            list2.append(iid + "::" + rank)
+            dict[uid] = list2
+        else:
+            dict_list = []
+            dict_list.append(iid + "::" + rank)
+            dict[uid] = dict_list
+    for key in dict.keys():
+        if len(dict[key]) == 1:
+            train.append(str(key) + "::" + str(dict[key][0]))
+        else:
+            test.append(str(key) + "::" + str(dict[key][0]))
+            for i in range(len(dict[key]) - 1):
+                train.append(str(key) + "::" + str(dict[key][i + 1]))
+    return train, test
 
 
 def evaluate(test_dict, tuijian_dict, topK):

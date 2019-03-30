@@ -75,9 +75,12 @@ def itemPop(filename, topk):
 
 
 if __name__ == '__main__':
-    test_dict, tuijian_list_dict = itemPop("ml-1m")
-    file = open("ml-1m/tmp.txt", 'a')
-    file.write("test_dict=" + str(test_dict) + "\n" + "tuijian_list_dict" + str(tuijian_list_dict) + "\n")
+    filename = "book-crossing"
+    test_dict, tuijian_list_dict = itemPop(filename, 10)
+    file = open("itemPop.txt", 'a')
+    file.write(
+        "data=" + filename + "\n" + "test_dict=" + str(test_dict) + "\n" + "tuijian_list_dict" + str(
+            tuijian_list_dict) + "\n")
     hr, ndcg = evaluate(test_dict, tuijian_list_dict, 10)
     print "hr=" + str(hr), "ndcg=" + str(ndcg)
     file.write("hr=" + str(hr) + "\n" + "ndcg=" + str(ndcg) + "\n")
