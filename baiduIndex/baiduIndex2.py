@@ -4,6 +4,7 @@ import os
 import random
 import time
 import urllib
+import MySQLdb
 
 import requests
 
@@ -13,6 +14,8 @@ from openpyxl.styles import *
 import sys
 
 import warnings
+
+from utils.IntUtil import noneTo0
 
 warnings.filterwarnings('ignore')
 
@@ -33,11 +36,25 @@ def decryption(keys, data):
 
 
 if __name__ == "__main__":
+    db = MySQLdb.connect("localhost", "root", "123456", "scweb_compare")
+    cursor = db.cursor()
+    db.set_character_set('utf8')
+    # dbc.execute('SET NAMES utf8;')
+    # dbc.execute('SET CHARACTER SET utf8;')
+    # dbc.execute('SET character_set_connection=utf8;')
+
+    # print '%s的年龄是%d岁'  %('', None)
+
     notIncluded = [];
-    inwb = load_workbook("scname.xlsx")
+    ls = []
+    # 中国科学家博物馆
+    inwb = load_workbook("scname-casyswk.xlsx")
+    outFileName='baiduIndex_scientist.xlsx';
+    # # 中国科学院院士文库
+    # inwb = load_workbook("scname-test.xlsx")
+    # outFileName = 'baiduIndex_casyswk.xlsx';
     sheet = inwb.active
     inwbIndex = 2;
-    ls = []
     scname = sheet["A" + str(inwbIndex)].value
     while (scname is not None):
         time.sleep(random.randint(3, 15))
@@ -97,9 +114,14 @@ if __name__ == "__main__":
         # res = js.call('decryption', key, source)  # 调用此方式解密，需要打开上面的注解
 
         res = decryption(key, source)
+        # 当前科学家在所选时间段内没有数据（可能时间段后被收录的）
+        if (res == ''):
+            notIncluded.append(scname)
+            inwbIndex = inwbIndex + 1
+            scname = sheet["A" + str(inwbIndex)].value
+            continue
         # print(type(res))
         resArr = res.split(",")
-
         dateStart = datetime.datetime.strptime(startDate, '%Y-%m-%d')
         dateEnd = datetime.datetime.strptime(endDate, '%Y-%m-%d')
         dataLs = []
@@ -111,21 +133,32 @@ if __name__ == "__main__":
         for i in range(len(dataLs)):
             print urllib.unquote(scname), dataLs[i], resArr[i]
             ls.append([urllib.unquote(scname), dataLs[i], resArr[i]])
+            sql = "replace into scweb_compare.baiduindex_scname(scname,  date, value,record_time ) VALUES ('%s', '%s','%d','%s')" % (
+                scname, dataLs[i], int(noneTo0(resArr[i])),time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())));
+            try:
+                cursor.execute(sql)
+                db.commit()
+                print "success"
+            except Exception, e:
+                db.rollback()
+                db.close()
+                print repr(e)
 
         # wb = load_workbook('baiduIndex_scientist.xlsx');
         # ws1 = wb.create_sheet('科学家');
         inwbIndex = inwbIndex + 1
         scname = sheet["A" + str(inwbIndex)].value
-        if os.path.exists('baiduIndex_scientist.xlsx'):
-            outwb = load_workbook('baiduIndex_scientist.xlsx')
-        else:
-            outwb = Workbook()
-        if 'result' in outwb.sheetnames:
-            resultSheet =outwb.get_sheet_by_name('result')
-        else:
-            resultSheet = outwb.create_sheet('result', 0)
-        for i in range(len(ls)):
-            resultSheet.append(ls[i])
-    notIncludedSheet = outwb.create_sheet('notIncluded', 1)
-    notIncludedSheet.append(notIncluded)
-    outwb.save("baiduIndex_scientist.xlsx")
+        # if os.path.exists(outFileName):
+        #     outwb = load_workbook(outFileName)
+        # else:
+        #     outwb = Workbook()
+        # if 'result' in outwb.sheetnames:
+        #     resultSheet = outwb.get_sheet_by_name('result')
+        # else:
+        #     resultSheet = outwb.create_sheet('result', 0)
+        # for i in range(len(ls)):
+        #     resultSheet.append(ls[i])
+
+    # notIncludedSheet = outwb.create_sheet('notIncluded', 1)
+    # notIncludedSheet.append(notIncluded)
+    # outwb.save(outFileName)
