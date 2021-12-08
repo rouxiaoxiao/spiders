@@ -48,7 +48,7 @@ if __name__ == "__main__":
     notIncluded = [];
     ls = []
     # 中国科学家博物馆
-    inwb = load_workbook("scname-casyswk.xlsx")
+    inwb = load_workbook("scname-all.xlsx")
     outFileName='baiduIndex_scientist.xlsx';
     # # 中国科学院院士文库
     # inwb = load_workbook("scname-test.xlsx")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     while (scname is not None):
         time.sleep(random.randint(3, 15))
         print scname + '=====================' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-        dataUrl = 'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' + scname + '%22,%22wordType%22:1%7D]]&startDate=2021-01-01&endDate=2021-10-31'
+        dataUrl = 'https://index.baidu.com/api/SearchApi/index?area=0&word=[[%7B%22name%22:%22' + scname + '%22,%22wordType%22:1%7D]]&startDate=2021-01-01&endDate=2021-11-30'
         keyUrl = 'https://index.baidu.com/Interface/ptbk?uniqid='
         header = {
             'Accept': 'application/json, text/plain, */*',
@@ -81,10 +81,22 @@ if __name__ == "__main__":
         resData = requests.get(dataUrl, timeout=30, headers=header)
         # 当前科学家没被百度指数收录，则记录进数组
         if (resData.json()['status'] != 0):
-            notIncluded.append(scname)
+            # notIncluded.append(scname)
+            sql = "insert into scweb_compare.baiduindex_scname_notincluded(scname, record_time ) VALUES ('%s', '%s')" % (
+                scname,
+                time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())));
+            try:
+                cursor.execute(sql)
+                db.commit()
+                print "success"
+            except Exception, e:
+                db.rollback()
+                db.close()
+                print repr(e)
+            continue
             inwbIndex = inwbIndex + 1
             scname = sheet["A" + str(inwbIndex)].value
-            continue
+
         uniqid = resData.json()['data']['uniqid']
         print("uniqid:{}".format(uniqid))
         keyData = requests.get(keyUrl + uniqid, timeout=30, headers=header)
@@ -116,10 +128,22 @@ if __name__ == "__main__":
         res = decryption(key, source)
         # 当前科学家在所选时间段内没有数据（可能时间段后被收录的）
         if (res == ''):
-            notIncluded.append(scname)
+            # notIncluded.append(scname)
+            sql = "insert into scweb_compare.baiduindex_scname_notincluded(scname, record_time ) VALUES ('%s', '%s')" % (
+                scname,
+                time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())));
+            try:
+                cursor.execute(sql)
+                db.commit()
+                print "success"
+            except Exception, e:
+                db.rollback()
+                db.close()
+                print repr(e)
+            continue
             inwbIndex = inwbIndex + 1
             scname = sheet["A" + str(inwbIndex)].value
-            continue
+
         # print(type(res))
         resArr = res.split(",")
         dateStart = datetime.datetime.strptime(startDate, '%Y-%m-%d')
