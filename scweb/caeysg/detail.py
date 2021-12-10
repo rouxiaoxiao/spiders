@@ -25,6 +25,9 @@ headers = [
     "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)"
 ]
 
+grxxSet = set([])
+grxxSet2 = set([])
+
 
 # 个人主页
 def get_content(id, number):
@@ -39,69 +42,109 @@ def get_content(id, number):
     req.add_header("GET", url)
     while True:
         try:
-            print "start..."
+            # print "start..."
             contentfirst = opener.open(req, timeout=15)
-            print contentfirst.getcode()
+            # print contentfirst.getcode()
             if contentfirst.getcode() != 200:
                 return None
-            print contentfirst
-            print "start contentfirst.read()..."
+            # print contentfirst
+            # print "start contentfirst.read()..."
             content = contentfirst.read().decode('utf-8')
             # time.sleep(2)
-            print "start soup..."
+            # print "start soup..."
             soup = BeautifulSoup(content, "lxml")
             # 定义返回的json字符串
             scDetail = {}
+            scDetail['scname'] = ''
+            scDetail['nationality'] = ''
+            scDetail['electedyear'] = ''
+            scDetail['sex'] = ''
+            scDetail['birthday'] = ''
+            scDetail['deadday'] = ''
+            scDetail['faculty'] = ''
+            scDetail['birthplace'] = ''
+            scDetail['nationality'] = ''
+            scDetail['nationality2'] = ''
+            scDetail['links'] = ''
+            scDetail['cjgx'] = ''
+            scDetail['ysyx'] = ''
+            scDetail['synopsis'] = ''
+            scDetail['rsddJson'] = ''
+
+            # 头部
+            if (soup.find(name="div", attrs={"class": "detail_top_text"}) != None):
+                get_content_top(soup, scDetail)
+            elif (soup.find(name="div", attrs={"class": "detail_top_text2"}) != None):
+                get_content_top2(soup, scDetail)
+
+            # 个人信息
+            if (soup.find(name="div", attrs={"class": "particular_info"}) != None):
+                scDetail = get_content_grxx(soup, scDetail)
+            elif (soup.find(name="div", attrs={"class": "particular_info2"}) != None):
+                scDetail = get_content_grxx2(soup, scDetail)
+
+            # 成就贡献
+            if (soup.find(name="div", attrs={"class": "detail_cjgx_kjjx"}) != None):
+                detail_cjgx_kjjx_list = soup.find(name="div", attrs={"class": "detail_cjgx_kjjx"}).find(name="div",
+                                                                                                        attrs={
+                                                                                                            "class": "container"}).findAll(
+                    name="div", attrs={"class": "title"})
+                cjgxlist = []
+                for item in detail_cjgx_kjjx_list:
+                    cjgxlist.append(item.get_text().replace("\n", "").replace("\r", ""))
+                scDetail['cjgx'] = ','.join(cjgxlist)
+            # 人生点滴
+            rsdd = []
+            if (soup.find(name="div", attrs={"class": "detail_rxdd_box"}) != None):
+                detail_rxdd_box_container_list = soup.find(name="div", attrs={"class": "detail_rxdd_box"}).findAll(
+                    name="div", attrs={"class": "container"})
+                for item in detail_rxdd_box_container_list:
+                    rsddObj = {}
+                    rsdd_top_main = item.find(name="div", attrs={"class": "top_main"}).get_text().replace("\n",
+                                                                                                          "").replace(
+                        "\r", "")
+                    rsdd_bottome_main = item.find(name="div",
+                                                  attrs={"class": "bottome_main"}).get_text().strip().replace(" ",
+                                                                                                              "").replace(
+                        "\r", "").replace("\n", "")
+                    rsddObj['key'] = rsdd_top_main
+                    rsddObj['value'] = rsdd_bottome_main
+                    rsdd.append(rsddObj)
+                scDetail['rsddJson'] = listToJson(rsdd)
+            # 院士印象
+            if (soup.find(name="div", attrs={"class": "tag_container"}) != None):
+                tag_container = soup.find(name="div", attrs={"class": "tag_container"}).findAll(name="span")
+                ysyxList = []
+                for item in tag_container:
+                    ysyxList.append(item.get_text())
+                scDetail['ysyx'] = ','.join(ysyxList)
+            # 结构
             detail_frame = []
-            detail_frame_li_list = soup.find(name="div", attrs={"class": "detail_frame"}).findAll(name="li")
+            detail_frame_li_list = soup.find(name="div", attrs={"class": "detail_frame"}).find(name="div",
+                                                                                               attrs={
+                                                                                                   "class": "navtab"}).find(
+                name="ul").findAll(name="li")
             for item in detail_frame_li_list:
                 detail_frame_item = {}
                 classname = item.get_text().replace("\n", "")
+                data_src = item['data-src']
                 detail_frame_item['key'] = classname
+                detail_frame_item['value'] = data_src
                 subNavs = item.find(name="div", attrs={"class": "subNavs"})
                 if subNavs != None:
                     subNavs_div = subNavs.findAll(name="div")
                     subItemList = []
-                    for subItem in subNavs_div:
+                    for subitem in subNavs_div:
                         subItemObj = {}
-                        sub_data_url = subItem['data-url']
-                        sub_data_name = subItem['data-name']
+                        sub_data_url = subitem['data-url']
+                        sub_data_name = subitem['data-name']
                         subItemObj['key'] = sub_data_name
                         subItemObj['value'] = sub_data_url
                         subItemList.append(subItemObj)
                     detail_frame_item['list'] = subItemList
-                    detail_frame.append(detail_frame_item)
+                detail_frame.append(detail_frame_item)
             scDetail['detail_frame'] = detail_frame
             scDetail['detail_frame_json'] = listToJson(detail_frame)
-            # 个人信息
-            particular_info = soup.find(name="div", attrs={"class": "particular_info"})
-            top_part = particular_info.find(name="div", attrs={"class": "top_part"})
-            acInfo = top_part.find(name="div", attrs={"class": "acInfo"})
-            acInfo_div = acInfo.findAll(name="div")
-            scname = acInfo_div[0].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
-            nationality = acInfo_div[1].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
-            sex = acInfo_div[2].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
-            birthplace = ','.join(acInfo_div[3].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip().split())
-            birthday = acInfo_div[4].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip()
-            scDetail['scname'] = scname
-            scDetail['nationality'] = nationality
-            scDetail['sex'] = sex
-            scDetail['birthplace'] = birthplace
-            scDetail['birthday'] = birthday
-            bottome_part = particular_info.find(name="div", attrs={"class": "bottome_part"})
-            bottome_part_div = bottome_part.findAll(name="div")
-            electedyear = ','.join(bottome_part_div[0].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip().split())
-            faculty =','.join(bottome_part_div[1].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip().split())
-            links_a = bottome_part_div[1].findAll(name="h4")[1].findAll(name="a")
-            linkList = []
-            links = ''
-            for item in links_a:
-                linkList.append(item['href'])
-            if (len(linkList) > 0):
-                links = ','.join(linkList)
-            scDetail['electedyear'] = electedyear
-            scDetail['faculty'] = faculty
-            scDetail['links'] = links
             contentfirst.close()
             return scDetail
         except urllib2.URLError, e:
@@ -110,6 +153,115 @@ def get_content(id, number):
         except ssl.SSLError, e:
             print 'SSLError...'
             print e
+
+
+# 针对普通个人信息卡片格式
+def get_content_grxx(soup, scDetail):
+    particular_info = soup.find(name="div", attrs={"class": "particular_info"})
+    top_part = particular_info.find(name="div", attrs={"class": "top_part"})
+    acInfo = top_part.find(name="div", attrs={"class": "acInfo"})
+    acInfo_div = acInfo.findAll(name="div")
+    for item in acInfo_div:
+        key=item.get_text().split(":")[0]
+        value=item.get_text().split(":")[1].replace("\n", "").replace("\r", "").strip()
+        grxxSet.add(item.get_text().split(":")[0])
+        if (key == "姓名"):
+            scDetail['scname'] = value
+        elif (key == "民族"):
+            scDetail['nationality'] = value
+        elif (key == "当选年份"):
+            scDetail['electedyear'] = ','.join(value.strip().split())
+        elif (key == "性别"):
+            scDetail['sex'] = value
+        elif (key == "出生日期"):
+            scDetail['birthday'] = value
+        elif (key == "去世日期"):
+            scDetail['deadday'] = value
+        elif (key == "学部"):
+            scDetail['faculty'] = ','.join(value.strip().split()).replace(" ", "")
+        elif (key == "籍贯"):
+            scDetail['birthplace'] = ','.join(value.strip().split())
+        elif (key == "国籍"):
+            scDetail['nationality2'] = value
+    # scname = acInfo_div[0].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
+    # nationality = acInfo_div[1].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
+    # sex = acInfo_div[2].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "")
+    # birthplace = ','.join(
+    #     acInfo_div[3].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip().split())
+    # birthday = acInfo_div[4].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r", "").strip()
+    # scDetail['scname'] = scname
+    # scDetail['nationality'] = nationality
+    # scDetail['sex'] = sex
+    # scDetail['birthplace'] = birthplace
+    # scDetail['birthday'] = birthday
+    bottome_part = particular_info.find(name="div", attrs={"class": "bottome_part"})
+    bottome_part_div = bottome_part.findAll(name="div")
+    electedyear = ','.join(
+        bottome_part_div[0].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r",
+                                                                                       "").strip().split())
+    faculty = ','.join(bottome_part_div[1].findAll(name="h4")[1].get_text().replace("\n", "").replace("\r",
+                                                                                                      "").strip().split())
+    links_a = bottome_part_div[1].findAll(name="h4")[1].findAll(name="a")
+    linkList = []
+    links = ''
+    for item in links_a:
+        linkList.append(item['href'])
+    if (len(linkList) > 0):
+        links = ','.join(linkList)
+    scDetail['electedyear'] = electedyear
+    scDetail['faculty'] = faculty
+    scDetail['links'] = links
+    return scDetail
+
+
+# 针对另一种个人信息卡片格式
+def get_content_grxx2(soup, scDetail):
+    particular_info2 = soup.find(name="div", attrs={"class": "particular_info2"}).find(name="ul").findAll(
+        name="li")
+    for item in particular_info2:
+        subItemList = item.findAll(name="div", recursive=False)
+        for subItem in subItemList:
+            key = subItem.get_text().split(":")[0]
+            value = subItem.get_text().split(":")[1].replace("\n", "").replace("\r", "").strip()
+            grxxSet2.add(key)
+            if (key == "姓名"):
+                scDetail['scname'] = value
+            elif (key == "民族"):
+                scDetail['nationality'] = value
+            elif (key == "当选年份"):
+                scDetail['electedyear'] = ','.join(value.strip().split())
+            elif (key == "性别"):
+                scDetail['sex'] = value
+            elif (key == "出生日期"):
+                scDetail['birthday'] = value
+            elif (key == "去世日期"):
+                scDetail['deadday'] = value
+            elif (key == "学部"):
+                scDetail['faculty'] = ','.join(value.strip().split()).replace(" ", "")
+            elif (key == "籍贯"):
+                scDetail['birthplace'] = ','.join(value.strip().split())
+            elif (key == "国籍"):
+                scDetail['nationality2'] = value
+    return scDetail
+
+# 针对普通头部
+def get_content_top(soup, scDetail):
+    scDetail['department'] = ','.join(
+        soup.find(name="div", attrs={"class": "detail_top_department"}).get_text().split())
+    scDetail['synopsis'] = soup.find(name="div", attrs={"class": "detail_top_synopsis"}).get_text().replace(
+        "\n", "").replace("\r", "")
+    return scDetail
+
+
+# 针对另一种头部
+def get_content_top2(soup, scDetail):
+    scDetail['scname'] = ','.join(
+        soup.find(name="div", attrs={"class": "acadeName"}).get_text().split())
+    scDetail['department'] = soup.find(name="div", attrs={"class": "department"}).get_text().replace(
+        "\n", "").replace("\r", "")
+    return scDetail
+
+
 
 
 def spider(id):
@@ -129,14 +281,19 @@ def spider(id):
             acInfoId = it[0]
             result = get_content(id, acInfoId)
             print result.get('gaishu')
-            sql = "INSERT INTO scweb_compare.scdetail_caeysg( record_time,acInfoId ,detail_frame, scname, nationality, sex, birthplace, birthday, electedyear, faculty, links)  VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (
+            sql = "INSERT INTO scweb_compare.scdetail_caeysg( record_time,acInfoId ,detail_frame, scname, nationality, sex, birthplace, birthday, electedyear, faculty, links, department, synopsis, cjgx, rsddJson, ysyx, nationality2，deadday)  VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (
                 time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
                 acInfoId,
                 db.escape_string(result.get('detail_frame_json')), db.escape_string(result.get('scname')),
                 db.escape_string(result.get('nationality')), db.escape_string(result.get('sex')),
                 db.escape_string(result.get('birthplace')), db.escape_string(result.get('birthday')),
                 db.escape_string(result.get('electedyear')), db.escape_string(result.get('faculty')),
-                db.escape_string(result.get('links')))
+                db.escape_string(result.get('links')),
+                db.escape_string(result.get('department')), db.escape_string(result.get('synopsis')),
+                db.escape_string(result.get('cjgx')), db.escape_string(result.get('rsddJson')),
+                db.escape_string(result.get('ysyx')),
+                db.escape_string(result.get('nationality2')),
+                db.escape_string(result.get('deadday')))
             try:
                 cursor.execute(sql)
                 db.commit()
@@ -149,20 +306,33 @@ def spider(id):
             classnameList = result.get("detail_frame");
             for item in classnameList:
                 classname = item.get('key')
-                for type in item.get('list'):
-                    typename = type.get('key')
-                    value = type.get('value')
-                    sql = "INSERT INTO scweb_compare.scdetail_suburl_caeysg(  classname, typename, value, acInfoId, record_time)  VALUES ('%s', '%s', '%s', '%s', '%s')" % (
-                        db.escape_string(classname), db.escape_string(typename), db.escape_string(value), acInfoId,
-                        time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
-                    try:
-                        cursor.execute(sql)
-                        db.commit()
-                        print "success"
-                    except Exception, e:
-                        db.rollback()
-                        db.close()
-                        print repr(e)
+                data_src = item.get('value') if item.get('value') != None else ''
+                sql = "INSERT INTO scweb_compare.scdetail_suburl_caeysg(  classname,  value, acInfoId, record_time)  VALUES ('%s', '%s', '%s', '%s')" % (
+                    db.escape_string(classname), db.escape_string(data_src), acInfoId,
+                    time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+                try:
+                    cursor.execute(sql)
+                    db.commit()
+                    print "success"
+                except Exception, e:
+                    db.rollback()
+                    db.close()
+                    print repr(e)
+                if item.get('list') != None:
+                    for type in item.get('list'):
+                        typename = type.get('key')
+                        value = type.get('value') if type.get('value') != None else ''
+                        sql = "INSERT INTO scweb_compare.scdetail_suburl_caeysg(  classname, typename, value, acInfoId, record_time)  VALUES ('%s', '%s', '%s', '%s', '%s')" % (
+                            db.escape_string(classname), db.escape_string(typename), db.escape_string(value), acInfoId,
+                            time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+                        try:
+                            cursor.execute(sql)
+                            db.commit()
+                            print "success"
+                        except Exception, e:
+                            db.rollback()
+                            db.close()
+                            print repr(e)
         print "all success"
     except Exception, e:
         db.rollback()
@@ -172,4 +342,9 @@ def spider(id):
 
 if __name__ == '__main__':
     print "hello"
-    spider(0)
+    # 页面不同 id=3 柏连阳
+    spider(1338)
+    print "===========grxxSet========="
+    print grxxSet
+    print "===========grxxSet2========="
+    print grxxSet2
