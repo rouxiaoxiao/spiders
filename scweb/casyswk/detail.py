@@ -11,7 +11,7 @@ import urllib2
 import MySQLdb
 from bs4 import BeautifulSoup
 
-from utils.JsonUtil import listToJson
+from utils.JsonUtil import listToJsonStr
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -84,7 +84,7 @@ def get_content(id, number):
                     classnameDetail['key'] = item.find(name="h4").next.replace("\t", "").replace("\n", "")
                     classnameDetail['list'] = typenameList;
                     classnameList.append(classnameDetail)
-            scDetail['classnameListJson'] = listToJson(classnameList)
+            scDetail['classnameListJson'] = listToJsonStr(classnameList)
             scDetail['classnameList'] = classnameList
             contentfirst.close()
             return scDetail

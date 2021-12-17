@@ -11,7 +11,7 @@ import urllib2
 import MySQLdb
 from bs4 import BeautifulSoup
 
-from utils.JsonUtil import listToJson
+from utils.JsonUtil import listToJsonStr
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -110,7 +110,7 @@ def get_content(id, number):
                     rsddObj['key'] = rsdd_top_main
                     rsddObj['value'] = rsdd_bottome_main
                     rsdd.append(rsddObj)
-                scDetail['rsddJson'] = listToJson(rsdd)
+                scDetail['rsddJson'] = listToJsonStr(rsdd)
             # 院士印象
             if (soup.find(name="div", attrs={"class": "tag_container"}) != None):
                 tag_container = soup.find(name="div", attrs={"class": "tag_container"}).findAll(name="span")
@@ -144,7 +144,7 @@ def get_content(id, number):
                     detail_frame_item['list'] = subItemList
                 detail_frame.append(detail_frame_item)
             scDetail['detail_frame'] = detail_frame
-            scDetail['detail_frame_json'] = listToJson(detail_frame)
+            scDetail['detail_frame_json'] = listToJsonStr(detail_frame)
             contentfirst.close()
             return scDetail
         except urllib2.URLError, e:
